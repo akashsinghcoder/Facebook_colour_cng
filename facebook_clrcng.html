@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Color Change Boxes</title>
+    <script src="https://kit.fontawesome.com/40856de9e9.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        h1{
+            text-align: center;
+        }
+        .container{
+            width: 100%;
+            height: 600px;
+            border: 1px solid black;
+            transition: background-color 1s;
+        }
+        .box{
+            width: calc(30% - 10px); 
+            height: 100px; 
+            border: 1px solid rgb(48, 48, 48);
+            border-left: 0px;
+            border-right: 0px;
+            float: left;
+            /* color: black; */
+        }
+        .box:hover{
+            /* color: #ffffff; */
+            cursor: pointer;
+        }
+        #box1,#box3,#box5{
+            margin-left: 270px;
+            margin-right: 30px;
+        }
+        #box1,#box2{
+            margin-top: 50px;
+        }
+        .icons{
+            font-size: 50px;
+            position: relative;
+            top: 20px;
+            left: 20px;
+        }
+        .text{
+            position: relative;
+            font-size: 30px;
+            left: 20px;
+            top: -10px;
+        }
+        .blur{
+            filter: blur(3px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Colour Changer</h1>
+    <div class="container" id="container">
+        <div class="box" id="box1" onmouseover="color_chg('#316FF6','#ffffff');" onmouseout="color_chg('#ffffff','#000000')"><span class="icons"><i class="fa-brands fa-facebook"></i><span class="text">Facebook</span></span></div>
+        <div class="box" id="box2" onmouseover="changeGradientBackground('linear-gradient(90deg, #4c3cfa,#ff756b)','#ffffff');" onmouseout="restoreGradientBackground('#ffffff','#000000')"><span class="icons"><i class="fa-brands fa-facebook-messenger"></i><span class="text">Messenger</span></span></div>
+        <div class="box" id="box3" onmouseover="changeGradientBackground('linear-gradient(350deg, #feda75,#fa7e1e,#d62976,#962fbf ,#4f5bd5)','#ffffff');" onmouseout="restoreGradientBackground('#ffffff','#000000')"><span class="icons"><i class="fa-brands fa-instagram"></i><span class="text">Instagram</span></span></div>
+        <div class="box" id="box4" onmouseover="color_chg('#25d366','#ffffff');" onmouseout="color_chg('#ffffff','#000000')"><span class="icons"><i class="fa-brands fa-whatsapp"></i><span class="text">Whatsapp</span></span></div>
+        <div class="box" id="box5" onmouseover="color_chg('#1c1c1c','#ffffff');" onmouseout="color_chg('#ffffff','#000000')"><span class="icons"><i class="fa-brands fa-meta"></i><span class="text">Meta</span></span></div>
+        <div class="box" id="box6" onmouseover="changeGradientBackground('linear-gradient(45deg, #3369e8, #eeb211, #009925, #d50f25)','#ffffff');" onmouseout="restoreGradientBackground('#ffffff','#000000')"><span class="icons"><i class="fa-brands fa-google"></i><span class="text">Google</span></span></div>
+    </div>
+
+    <script>
+        function color_chg(backgroundColor , color) {
+            document.getElementById('container').style.backgroundColor = backgroundColor;
+            document.getElementById('container').style.color = color;
+           
+        }
+
+
+        function changeGradientBackground(backgroundColor , color) {
+            document.querySelector('.container').style.background = backgroundColor;
+            document.getElementById('container').style.color = color;
+        }
+        function restoreGradientBackground(backgroundColor , color) {
+            document.querySelector('.container').style.background = backgroundColor;
+            document.getElementById('container').style.color = color;
+        }
+
+
+        document.querySelectorAll('.box').forEach(box => {
+        box.addEventListener('mouseover', function() {
+            document.querySelectorAll('.box').forEach(b => {
+            if (b !== box) b.classList.add('blur');
+            });
+        });
+
+        box.addEventListener('mouseout', function() {
+            document.querySelectorAll('.box').forEach(b => {
+            b.classList.remove('blur');
+            });
+        });
+        });
+    </script>
+</body>
+</html>
